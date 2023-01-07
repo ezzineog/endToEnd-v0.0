@@ -4,14 +4,9 @@ import ContactPhoneOutlinedIcon from '@mui/icons-material/ContactPhoneOutlined';
 import TroubleshootOutlinedIcon from '@mui/icons-material/TroubleshootOutlined';
 import ChatOutlinedIcon from '@mui/icons-material/ChatOutlined';
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
-// import ToggleColorMode from './ToggleColorMode';
-import { useSelector, useDispatch } from "react-redux";
-import { toggleTheme } from '../redux/reducers/themeSlice';
+import ToggleColorMode from './ToggleColorMode';
 
 function NavBar() {
-    const dispatch = useDispatch();
-    const darkMode = useSelector((state) => state.theme.darkMode)
-    console.log(darkMode)
     return (
         <div className=" flex place-items-center justify-between bg-indigo-500 content-center ">
 
@@ -35,7 +30,7 @@ function NavBar() {
             <div className="flex  space-x-5">
 
                 <div className="flex">
-                    <button onClick={() => dispatch(toggleTheme())} >chagne to {darkMode ? "light" :"dark"}</button>
+                    <ToggleColorMode/>
                     <p><CallOutlinedIcon /></p>
                     <p><NotificationsNoneIcon /></p>
                 </div>

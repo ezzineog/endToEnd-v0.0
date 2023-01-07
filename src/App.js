@@ -3,76 +3,34 @@ import Home from './home/Home';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
-
-const lightPalette = {
-  // palette values for light mode
-  primary: {
-    main: "#fffbeb",
-  },
-  divider: "#fde68a",
-  background: {
-    default: "#fbbf24",
-    paper: "#fbbf24",
-  },
-  text: {
-    primary: "#000",
-    secondary: "#27272a",
-  },
-}
-const darkPalette = {
-  // palette values for dark mode
-  primary: {
-    main: "#dbf4ff",
-  },
-  divider: "#004282",
-  background: {
-    default: "#000e21",
-    paper: "#000e21",
-  },
-  text: {
-    primary: "#fff",
-    secondary: "#71717a",
-  }
-}
-
-const getDesignTokens = (mode) => ({
-  palette: {
-    mode,
-    ...(mode === "light"
-      ? lightPalette
-      : darkPalette
-    ),
-  },
-});
+import { orange } from '@mui/material/colors';
+import { CssBaseline } from '@mui/material';
 
 function App() {
-
   const [mode, setMode] = useState("light");
-  const darkMode = useSelector((state) => state.theme.darkMode);
+  const mode_global_state = useSelector((state) => state.theme.mode_global_state);
 
   useMemo(() => {
-    // console.log(darkMode)
-    if (darkMode) {
-      setMode("dark");
-    } else {
-      setMode("light");
-    }
-  }, [darkMode]);
+    mode_global_state ? setMode("dark") : setMode("light")
+  }, [mode_global_state]);
 
-  const theme = useMemo(() => createTheme(getDesignTokens(mode)), [mode]);
-  // let test = useMemo(() => createTheme(darkPalette))
-
-
-
+  const theme = createTheme({
+    palette: {
+      mode: mode,
+    },
+  }
+    , [mode_global_state, mode]
+  );
 
   return (
     <ThemeProvider theme={theme}>
-      <div className="App">
+      <CssBaseline />
+      <div className="app-wrapper">
         <Home />
       </div>
     </ThemeProvider>
   );
 }
 
-{/* {1 == 1 ? <Home /> : <h1>NOT AUTHORIZED</h1>} */}
+{/* {1 == 1 ? <Home /> : <h1>NOT AUTHORIZED</h1>} */ }
 export default App;

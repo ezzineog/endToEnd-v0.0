@@ -1,35 +1,38 @@
-import React, { createContext, useContext } from 'react';
+import React from 'react';
 import IconButton from '@mui/material/IconButton';
 import Box from '@mui/material/Box';
-import { useTheme } from '@mui/material/styles';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
-
-const ColorModeContext = createContext({ toggleColorMode: () => { } });
+import { useDispatch, useSelector } from 'react-redux';
+import { toggleTheme } from '../redux/reducers/themeSlice';
 
 export default function ToggleColorMode() {
-  const theme = useTheme();
-  const colorMode = useContext(ColorModeContext);
-  const trace = () => {
-  
-    return colorMode.toggleColorMode;
+  const mode_global_state = useSelector((state) => state.theme.mode_global_state);
+  const dispatch = useDispatch()
+
+  const darkModeRecommanded = () => {
+    let ui_switch_txt = `switch to ${mode_global_state ? "light" : "dark"} mode`
+    return mode_global_state ? ui_switch_txt : ui_switch_txt.replace("switch to", "Try")
   }
+
   return (
     <Box
       sx={{
         display: 'flex',
-        width: '100%',
+        width: '250px  !important',
+        height: "10px !important",
         alignItems: 'center',
         justifyContent: 'center',
+        wordWrap: "break-word",
         bgcolor: 'background.default',
         color: 'text.primary',
-        borderRadius: 1,
+        borderRadius: 10,
         p: 3,
       }}
     >
-      {theme.palette.mode} mode
-      <IconButton sx={{ ml: 1 }} onClick={trace} color="inherit">
-        {theme.palette.mode === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}
+      {darkModeRecommanded()}
+      <IconButton sx={{ ml: 0.2 }} onClick={()=>dispatch(toggleTheme())} color="error">
+        {mode_global_state ? <Brightness4Icon />: <Brightness7Icon />}
       </IconButton>
     </Box>
   );
