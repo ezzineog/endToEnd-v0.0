@@ -6,6 +6,8 @@ module.exports = {
   ],
   theme: {
     extend: {
+      colors: { 'main-plot': '#222225' }
+      //  colors: { 'main-plot': '#2E1D30' }
     },
   },
   plugins: [],

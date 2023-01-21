@@ -26,7 +26,9 @@ function NavBar() {
                 <Link to="stats">
                     <h1 className="text-2l p-3.5 hover:bg-indigo-200 rounded-md cursor-pointer"><TroubleshootOutlinedIcon /> Statistic</h1>
                 </Link>
-                <h1 className="text-2l p-3.5 hover:bg-indigo-200 rounded-md cursor-pointer"><ChatOutlinedIcon /> Chat</h1>
+                <Link to="chat">
+                    <h1 className="text-2l p-3.5 hover:bg-indigo-200 rounded-md cursor-pointer"><ChatOutlinedIcon /> Chat</h1>
+                </Link>
                 <h1 className="text-2l p-3.5 hover:bg-indigo-200 rounded-md cursor-pointer"><SettingsOutlinedIcon /> Settings</h1>
             </div>
 
